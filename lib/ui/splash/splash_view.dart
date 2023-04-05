@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:route_ecommerce/ui/register/register_screen.dart';
+import 'package:route_ecommerce/ui/register/register_view.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashView extends StatelessWidget {
   static const String routeName = 'splash';
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Timer(
       const Duration(seconds: 3),(){
-        Navigator.pushReplacementNamed(context, RegisterScreen.routeName);
+        Navigator.pushReplacementNamed(context, RegisterView.routeName);
     });
     return Scaffold(
       body: Image.asset('assets/images/splash_screen.png',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:route_ecommerce/ui/login/login_screen.dart';
-import 'package:route_ecommerce/ui/register/register_screen.dart';
-import 'package:route_ecommerce/ui/splash/splash_screen.dart';
+import 'package:route_ecommerce/ui/login/login_view.dart';
+import 'package:route_ecommerce/ui/register/register_view.dart';
+import 'package:route_ecommerce/ui/splash/splash_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xff004182),
         scaffoldBackgroundColor: const Color(0xff004182)
       ),
-      initialRoute: LoginScreen.routeName,
+      initialRoute: LoginView.routeName,
       routes: {
-        SplashScreen.routeName :(_)=> const SplashScreen(),
-        RegisterScreen.routeName :(_)=>  RegisterScreen(),
-        LoginScreen.routeName :(_)=>  LoginScreen(),
+        SplashView.routeName :(_)=> const SplashView(),
+        RegisterView.routeName :(_)=>  RegisterView(),
+        LoginView.routeName :(_)=>  LoginView(),
       },
     );
   }

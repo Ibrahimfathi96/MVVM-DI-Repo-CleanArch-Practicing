@@ -6,15 +6,15 @@ import 'package:route_ecommerce/ui/widgets/form_label.dart';
 
 import '../widgets/custom_submit_button.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterView extends StatefulWidget {
   static const String routeName = 'register';
-  RegisterScreen({Key? key}) : super(key: key);
+  RegisterView({Key? key}) : super(key: key);
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<RegisterView> createState() => _RegisterViewState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterViewState extends State<RegisterView> {
   var formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();
