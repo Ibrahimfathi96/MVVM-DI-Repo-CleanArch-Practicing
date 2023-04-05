@@ -24,6 +24,15 @@ class _LoginViewState extends State<LoginView> implements LoginNavigator{
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
 
+  void logIn() async {
+    //validate form first
+    if (formKey.currentState?.validate() == false) {
+      return;
+    }
+    //our main logic
+    loginViewModel.login(emailController.text, passController.text);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -153,14 +162,5 @@ class _LoginViewState extends State<LoginView> implements LoginNavigator{
         ),
       ),
     );
-  }
-
-  void logIn() async {
-    //validate form first
-    if (formKey.currentState?.validate() == false) {
-      return;
-    }
-    //our main logic
-    loginViewModel.login(emailController.text, passController.text);
   }
 }
