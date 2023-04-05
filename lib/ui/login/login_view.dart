@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:route_ecommerce/provider/app_config_provider.dart';
-import 'package:route_ecommerce/ui/dialog%20utils.dart';
 import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/login/login_navigator.dart';
 import 'package:route_ecommerce/ui/login/login_view_model.dart';
@@ -9,6 +8,7 @@ import 'package:route_ecommerce/ui/register/register_view.dart';
 import 'package:route_ecommerce/ui/widgets/custom_form_field.dart';
 import 'package:route_ecommerce/ui/widgets/form_label.dart';
 
+import '../../base/base_state.dart';
 import '../widgets/custom_submit_button.dart';
 
 class LoginView extends StatefulWidget{
@@ -19,13 +19,17 @@ class LoginView extends StatefulWidget{
   State<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> implements LoginNavigator{
+class _LoginViewState extends BaseState<LoginView,LoginViewModel> implements LoginNavigator{
   var formKey = GlobalKey<FormState>();
 
-  LoginViewModel loginViewModel = LoginViewModel();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
+
+  @override
+  LoginViewModel initViewModel() {
+    return LoginViewModel();
+  }
 
   void logIn() async {
     //validate form first
@@ -33,43 +37,13 @@ class _LoginViewState extends State<LoginView> implements LoginNavigator{
       return;
     }
     //our main logic
-    loginViewModel.login(emailController.text, passController.text);
+    viewModel.login(emailController.text, passController.text);
   }
 
   @override
   void initState() {
     super.initState();
-    loginViewModel.loginNavigator = this;
-    loginViewModel.configProvider = Provider.of<AppConfigProvider>(context);
-  }
-
-  @override
-  void hideDialog() {
-    DialogUtils.hideDialog(context);
-  }
-
-  @override
-  void showMessage(String message,
-      {bool isDismissible = true,
-        VoidCallback? posAction,
-        VoidCallback? negAction,
-        String? posActionTitle,
-        String? negActionTitle,
-        String? posMessage,
-        String? negMessage}) {
-    DialogUtils.showMessage(context, message,
-        isDismissible: isDismissible,
-        posAction: posAction,
-        posActionTitle: posActionTitle,
-        negAction: negAction,
-        negActionTitle: negActionTitle,
-        negMessage: negMessage);
-  }
-
-  @override
-  void showProgressDialog(String message, {bool isDismissible = true}) {
-    DialogUtils.showProgressDialog(context, message,
-        isDismissible: isDismissible);
+    viewModel.configProvider = Provider.of<AppConfigProvider>(context);
   }
   
   @override
@@ -82,7 +56,7 @@ class _LoginViewState extends State<LoginView> implements LoginNavigator{
     return ChangeNotifierProvider(
       //to avoid re creating new object using LoginViewModel() every time rebuild
       //so we using single object we initialized above
-      create: (context) => loginViewModel,
+      create: (context) => viewModel,
       child: Scaffold(
         appBar: AppBar(),
         body: Padding(

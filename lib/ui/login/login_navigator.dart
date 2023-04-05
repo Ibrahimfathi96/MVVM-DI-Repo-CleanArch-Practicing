@@ -1,20 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:route_ecommerce/base/base_navigator.dart';
 
-abstract class LoginNavigator {
-  void hideDialog();
-
-  void showMessage(
-    String message, {
-    bool isDismissible = true,
-    VoidCallback? posAction,
-    VoidCallback? negAction,
-    String? posActionTitle,
-    String? negActionTitle,
-    String? posMessage,
-    String? negMessage,
-  });
-
-  void showProgressDialog(String message, {bool isDismissible = true});
-
+abstract class LoginNavigator extends BaseNavigator{
   void goToHome();
 }

@@ -8,37 +8,37 @@ it might cause memory/context leakage
 and in the view class you implement those functions and be able to use context
 */
 
-import 'package:flutter/material.dart';
 import 'package:route_ecommerce/api/api_manager.dart';
+import 'package:route_ecommerce/base/base_view_model.dart';
 import 'package:route_ecommerce/provider/app_config_provider.dart';
 import 'package:route_ecommerce/ui/login/login_navigator.dart';
 
-class LoginViewModel extends ChangeNotifier {
+class LoginViewModel extends BaseViewModel<LoginNavigator> {
   AppConfigProvider? configProvider;
-  LoginNavigator? loginNavigator;//nullable missing implementation => view implements this
+  // LoginNavigator? loginNavigator;//nullable missing implementation => view implements this
 
   void login(String email, String password)async{
-    loginNavigator?.showProgressDialog("loading...");
+    navigator?.showProgressDialog("loading...");
 
     try {
       var response = await ApiManager.login( email, password);
-      loginNavigator?.hideDialog();
+      navigator?.hideDialog();
       if(response.message!=null){
-        loginNavigator?.showMessage( response.message ??'',posActionTitle: "ok");
+        navigator?.showMessage( response.message ??'',posActionTitle: "ok");
         return ;
       }
       //navigate to home screen
-      loginNavigator?.showMessage('Successful Registration',posActionTitle: "ok",
+      navigator?.showMessage('Successful Registration',posActionTitle: "ok",
         posAction: (){
         //navigate to home
-          loginNavigator?.goToHome();
+          navigator?.goToHome();
        // response.token  //save it
           configProvider?.updateToken(response.token);
         },isDismissible: false
       );
     }catch (e) {
-      loginNavigator?.hideDialog();
-      loginNavigator?.showMessage("Error, $e");
+      navigator?.hideDialog();
+      navigator?.showMessage("Error, $e");
     }
   }
 }
