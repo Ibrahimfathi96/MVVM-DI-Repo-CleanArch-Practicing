@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:route_ecommerce/provider/app_config_provider.dart';
 import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/login/login_view.dart';
 import 'package:route_ecommerce/ui/register/register_view.dart';
 import 'package:route_ecommerce/ui/splash/splash_view.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => AppConfigProvider(),
+      child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

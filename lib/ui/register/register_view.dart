@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:route_ecommerce/provider/app_config_provider.dart';
 import 'package:route_ecommerce/ui/dialog%20utils.dart';
 import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/register/register_navigator.dart';
@@ -75,6 +76,7 @@ class _RegisterViewState extends State<RegisterView> implements RegisterNavigato
   void initState() {
     super.initState();
     registerViewModel.registerNavigator = this;
+    registerViewModel.configProvider = Provider.of<AppConfigProvider>(context);
   }
 
 

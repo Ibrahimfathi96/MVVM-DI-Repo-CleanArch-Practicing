@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:route_ecommerce/api/api_manager.dart';
 import 'package:route_ecommerce/ui/register/register_navigator.dart';
 
+import '../../provider/app_config_provider.dart';
+
 class RegisterViewModel extends ChangeNotifier{
+  AppConfigProvider? configProvider;
   RegisterNavigator? registerNavigator;
 
   void register(String name,String email, String password,String confirmPassword,String phone)async{
@@ -19,6 +22,8 @@ class RegisterViewModel extends ChangeNotifier{
       }
       registerNavigator?.showMessage('Successful Login ',posActionTitle: "ok",
         posAction: (){
+        // response.token  //save it
+        configProvider?.updateToken(response.token);
         registerNavigator?.goToHome();
         }
       );

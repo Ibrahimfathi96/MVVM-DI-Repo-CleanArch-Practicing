@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:route_ecommerce/provider/app_config_provider.dart';
 import 'package:route_ecommerce/ui/dialog%20utils.dart';
 import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/login/login_navigator.dart';
@@ -39,6 +40,7 @@ class _LoginViewState extends State<LoginView> implements LoginNavigator{
   void initState() {
     super.initState();
     loginViewModel.loginNavigator = this;
+    loginViewModel.configProvider = Provider.of<AppConfigProvider>(context);
   }
 
   @override

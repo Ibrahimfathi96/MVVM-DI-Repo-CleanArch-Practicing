@@ -10,9 +10,11 @@ and in the view class you implement those functions and be able to use context
 
 import 'package:flutter/material.dart';
 import 'package:route_ecommerce/api/api_manager.dart';
+import 'package:route_ecommerce/provider/app_config_provider.dart';
 import 'package:route_ecommerce/ui/login/login_navigator.dart';
 
 class LoginViewModel extends ChangeNotifier {
+  AppConfigProvider? configProvider;
   LoginNavigator? loginNavigator;//nullable missing implementation => view implements this
 
   void login(String email, String password)async{
@@ -30,6 +32,8 @@ class LoginViewModel extends ChangeNotifier {
         posAction: (){
         //navigate to home
           loginNavigator?.goToHome();
+       // response.token  //save it
+          configProvider?.updateToken(response.token);
         },isDismissible: false
       );
     }catch (e) {
