@@ -25,7 +25,13 @@ class LoginViewModel extends ChangeNotifier {
         loginNavigator?.showMessage( response.message ??'',posActionTitle: "ok");
         return ;
       }
-      loginNavigator?.showMessage(response.token ??'',posActionTitle: "ok");
+      //navigate to home screen
+      loginNavigator?.showMessage('Successful Registration',posActionTitle: "ok",
+        posAction: (){
+        //navigate to home
+          loginNavigator?.goToHome();
+        },isDismissible: false
+      );
     }catch (e) {
       loginNavigator?.hideDialog();
       loginNavigator?.showMessage("Error, $e");

@@ -15,4 +15,6 @@ abstract class LoginNavigator {
   });
 
   void showProgressDialog(String message, {bool isDismissible = true});
+
+  void goToHome();
 }

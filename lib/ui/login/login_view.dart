@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:route_ecommerce/ui/dialog%20utils.dart';
+import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/login/login_navigator.dart';
 import 'package:route_ecommerce/ui/login/login_view_model.dart';
+import 'package:route_ecommerce/ui/register/register_view.dart';
 import 'package:route_ecommerce/ui/widgets/custom_form_field.dart';
 import 'package:route_ecommerce/ui/widgets/form_label.dart';
 
@@ -67,6 +69,12 @@ class _LoginViewState extends State<LoginView> implements LoginNavigator{
     DialogUtils.showProgressDialog(context, message,
         isDismissible: isDismissible);
   }
+  
+  @override
+  void goToHome() {
+    Navigator.pushReplacementNamed(context, HomeView.routeName);
+  }
+  
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -147,10 +155,15 @@ class _LoginViewState extends State<LoginView> implements LoginNavigator{
                         const SizedBox(
                           height: 16,
                         ),
-                        const Text(
-                          "don't have an account? Create new Account",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        InkWell(
+                          onTap:(){
+                            Navigator.pushNamed(context, RegisterView.routeName);
+                          },
+                          child: const Text(
+                            "don't have an account? Create new Account",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontSize: 16),
+                          ),
                         ),
                       ],
                     ),

@@ -17,7 +17,11 @@ class RegisterViewModel extends ChangeNotifier{
         registerNavigator?.showMessage(response.mergeErrors(),posActionTitle: "ok");
         return ;
       }
-      registerNavigator?.showMessage(response.token ??'',posActionTitle: "ok");
+      registerNavigator?.showMessage('Successful Login ',posActionTitle: "ok",
+        posAction: (){
+        registerNavigator?.goToHome();
+        }
+      );
     }catch (e) {
       registerNavigator?.hideDialog();
       registerNavigator?.showMessage("Error, $e");

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:route_ecommerce/ui/dialog%20utils.dart';
+import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/register/register_navigator.dart';
 import 'package:route_ecommerce/ui/register/register_view_model.dart';
 import 'package:route_ecommerce/ui/widgets/custom_form_field.dart';
@@ -63,6 +64,11 @@ class _RegisterViewState extends State<RegisterView> implements RegisterNavigato
   void showProgressDialog(String message, {bool isDismissible = true}) {
     DialogUtils.showProgressDialog(context, message,
         isDismissible: isDismissible);
+  }
+
+  @override
+  void goToHome() {
+    Navigator.pushReplacementNamed(context, HomeView.routeName);
   }
 
   @override

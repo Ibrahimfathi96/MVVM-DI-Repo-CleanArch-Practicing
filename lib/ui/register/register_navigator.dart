@@ -15,4 +15,6 @@ abstract class RegisterNavigator {
   });
 
   void showProgressDialog(String message, {bool isDismissible = true});
+
+  void goToHome();
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/login/login_view.dart';
 import 'package:route_ecommerce/ui/register/register_view.dart';
 import 'package:route_ecommerce/ui/splash/splash_view.dart';
@@ -25,8 +26,9 @@ class MyApp extends StatelessWidget {
       initialRoute: LoginView.routeName,
       routes: {
         SplashView.routeName :(_)=> const SplashView(),
-        RegisterView.routeName :(_)=>  RegisterView(),
-        LoginView.routeName :(_)=>  LoginView(),
+        RegisterView.routeName :(_)=>  const RegisterView(),
+        LoginView.routeName :(_)=>  const LoginView(),
+        HomeView.routeName :(_)=>  const HomeView(),
       },
     );
   }
