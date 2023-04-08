@@ -8,23 +8,34 @@ it might cause memory/context leakage
 and in the view class you implement those functions and be able to use context
 */
 
-import 'package:route_ecommerce/api/api_manager.dart';
 import 'package:route_ecommerce/base/base_view_model.dart';
 import 'package:route_ecommerce/provider/app_config_provider.dart';
+import 'package:route_ecommerce/repository/auth_repo/auth_repo_contract.dart';
 import 'package:route_ecommerce/ui/login/login_navigator.dart';
 
 class LoginViewModel extends BaseViewModel<LoginNavigator> {
-  AppConfigProvider? configProvider;
+  AppConfigProvider configProvider;
+  AuthRepository authRepository;
+  // late AuthRemoteDataSource remoteDataSource;
+  // late ApiManager apiManager;
+  LoginViewModel(this.authRepository, this.configProvider);//constructor injection
+
+  // LoginViewModel(){
+  //   //we should use DI (Dependency Injection): this is not right
+  //   apiManager  = ApiManager();
+  //   remoteDataSource = AuthRemoteDataSourceImpl(apiManager);
+  //  authRepository = AuthRepositoryImp(remoteDataSource);
+  // }
   // LoginNavigator? loginNavigator;//nullable missing implementation => view implements this
 
   void login(String email, String password)async{
     navigator?.showProgressDialog("loading...");
 
     try {
-      var response = await ApiManager.login( email, password);
+      var token = await authRepository.login( email, password);
       navigator?.hideDialog();
-      if(response.message!=null){
-        navigator?.showMessage( response.message ??'',posActionTitle: "ok");
+      if(token!=null){
+        navigator?.showMessage( 'unable to login, wrong username or password',posActionTitle: "ok");
         return ;
       }
       //navigate to home screen
@@ -33,7 +44,7 @@ class LoginViewModel extends BaseViewModel<LoginNavigator> {
         //navigate to home
           navigator?.goToHome();
        // response.token  //save it
-          configProvider?.updateToken(response.token);
+          configProvider.updateToken(token);
         },isDismissible: false
       );
     }catch (e) {

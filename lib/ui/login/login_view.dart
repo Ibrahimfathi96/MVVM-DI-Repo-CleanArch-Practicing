@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:route_ecommerce/provider/app_config_provider.dart';
+import 'package:route_ecommerce/ui/dependency_injection.dart';
 import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/login/login_navigator.dart';
 import 'package:route_ecommerce/ui/login/login_view_model.dart';
 import 'package:route_ecommerce/ui/register/register_view.dart';
 import 'package:route_ecommerce/ui/widgets/custom_form_field.dart';
 import 'package:route_ecommerce/ui/widgets/form_label.dart';
-
 import '../../base/base_state.dart';
 import '../widgets/custom_submit_button.dart';
 
@@ -28,7 +27,7 @@ class _LoginViewState extends BaseState<LoginView,LoginViewModel> implements Log
 
   @override
   LoginViewModel initViewModel() {
-    return LoginViewModel();
+    return LoginViewModel(injectAuthRepository(),getAppConfigProvider(context));
   }
 
   void logIn() async {
@@ -43,7 +42,6 @@ class _LoginViewState extends BaseState<LoginView,LoginViewModel> implements Log
   @override
   void initState() {
     super.initState();
-    viewModel.configProvider = Provider.of<AppConfigProvider>(context);
   }
   
   @override

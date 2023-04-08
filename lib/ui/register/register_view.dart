@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:route_ecommerce/base/base_state.dart';
-import 'package:route_ecommerce/provider/app_config_provider.dart';
+import 'package:route_ecommerce/ui/dependency_injection.dart';
 import 'package:route_ecommerce/ui/home/home_view.dart';
 import 'package:route_ecommerce/ui/register/register_navigator.dart';
 import 'package:route_ecommerce/ui/register/register_view_model.dart';
@@ -38,7 +38,7 @@ class _RegisterViewState extends BaseState<RegisterView,RegisterViewModel> imple
 
   @override
   RegisterViewModel initViewModel() {
-    return RegisterViewModel();
+    return RegisterViewModel(getAppConfigProvider(context),injectAuthRepository(),);
   }
 
   @override
@@ -49,7 +49,6 @@ class _RegisterViewState extends BaseState<RegisterView,RegisterViewModel> imple
   @override
   void initState() {
     super.initState();
-    viewModel.configProvider = Provider.of<AppConfigProvider>(context);
   }
 
 
